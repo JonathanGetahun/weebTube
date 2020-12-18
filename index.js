@@ -20,7 +20,11 @@ app.use(bodyParser.json());
 app.use(cookieParser()); //parses cookies attached to the client request object
 
 
-app.post('/api/users/register', (req,res) => {
+app.get("/api/user/auth", (req,res) => {
+
+})
+
+app.post('/api/users/register', authenticated (req,res) => {
     const user = new User(req.body);
     
         user.save((err, doc) => {
@@ -46,6 +50,8 @@ app.post('/api/user/login', (req,res) => {
             if (!isMatch)
                 return res.json({ loginSuccess: false, message: "Wrong password" });
 
+            //we put the token in the cookie
+            //if you remove user.token or cookie, it will log out
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
                 res.cookie("w_authExp", user.tokenExp);
