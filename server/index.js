@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const config = require('./config/key');
+const userRouter = require('./routes/users');
 
 
 mongoose.connect(config.mongoURI,
@@ -17,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended : true}));
 app.use(bodyParser.json());
 app.use(cookieParser()); //parses cookies attached to the client request object
 
-app.use('/api/users', require('./routes/users'));
+app.use('/api/users', userRouter);
 
 app.get("/", (req,res) => {
     res.json({

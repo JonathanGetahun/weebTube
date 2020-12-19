@@ -48,11 +48,11 @@ userSchema.pre('save', function( next ) {
             bcrypt.hash(user.password, salt, function(err, hash){
                 if(err) return next(err);
                 user.password = hash 
-                next()
+                next();
             })
         })
     } else {
-        next()
+        next();
     }
 });
 
@@ -65,12 +65,12 @@ userSchema.methods.comparePassword = function(plainPassword,cb){
 
 //generates json web token when user is logging in and saves it to user document
 userSchema.methods.generateToken = function(cb) {
-    let user = this;
+    var user = this;
     console.log('user',user)
     console.log('userSchema', userSchema)
-    let token =  jwt.sign(user._id.toHexString(),'secret')
-    let oneHour = moment().add(1, 'hour').valueOf();
-
+    var token =  jwt.sign(user._id.toHexString(),'secret')
+    var oneHour = moment().add(1, 'hour').valueOf();
+    
     user.tokenExp = oneHour;
     user.token = token;
     user.save(function (err, user){
@@ -82,7 +82,7 @@ userSchema.methods.generateToken = function(cb) {
 //statics same as method but allow for defining functions that are directly on the model
 //compared to just the instance. 
 userSchema.statics.findByToken = function (token, cb) {
-    let user = this;
+    var user = this;
 
     //verify decodes token, it will give user_id since thats what we used to create it
     jwt.verify(token,'secret',function(err, decode){
