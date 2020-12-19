@@ -1,4 +1,4 @@
-const { User } = require('../models/User');
+const { User } = require('../models/user');
 
 
     //to check if we are authenticated or not
