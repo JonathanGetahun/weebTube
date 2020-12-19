@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const config = require('./config/key');
+const mongoose = require('mongoose');
 const userRouter = require('./routes/users');
 
 const MONGO_URI = config.mongoURI;
@@ -31,5 +32,5 @@ app.get("/", (req,res) => {
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-    console.log(`Server running at port ${port}`)
+    console.log(`Server running on port ${port}`)
 });

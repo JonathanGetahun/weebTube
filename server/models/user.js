@@ -41,7 +41,6 @@ userSchema.pre('save', function( next ) {
     
     //only when password is modified or change
     if(user.isModified('password')){   
-        // console.log('password changed')
         bcrypt.genSalt(saltRounds, function(err, salt){
             if(err) return next(err); //if it doesnt work then it skips save
     
@@ -66,8 +65,6 @@ userSchema.methods.comparePassword = function(plainPassword,cb){
 //generates json web token when user is logging in and saves it to user document
 userSchema.methods.generateToken = function(cb) {
     var user = this;
-    // console.log('user',user)
-    // console.log('userSchema', userSchema)
     var token =  jwt.sign(user._id.toHexString(),'secret')
     var oneHour = moment().add(1, 'hour').valueOf();
     
@@ -85,8 +82,8 @@ userSchema.statics.findByToken = function (token, cb) {
     var user = this;
 
     //verify decodes token, it will give user_id since thats what we used to create it
+    //searches for this user with user_id and token
     jwt.verify(token,'secret',function(err, decode){
-        //searches for this user with user_id and token
         user.findOne({"_id":decode, "token":token}, function(err, user){
             if(err) return cb(err);
             cb(null, user);
