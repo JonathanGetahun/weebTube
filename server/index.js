@@ -7,8 +7,8 @@ const cookieParser = require('cookie-parser');
 const config = require('./config/key');
 const userRouter = require('./routes/users');
 
-
-const connect = mongoose.connect(config.mongoURI,
+const MONGO_URI = config.MONGO_URI;
+const connect = mongoose.connect(MONGO_URI,
     {
       useNewUrlParser: true, useUnifiedTopology: true,
       useCreateIndex: true, useFindAndModify: false
@@ -28,7 +28,7 @@ app.get("/", (req,res) => {
     })
 })
 
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`Server running at port ${port}`)
