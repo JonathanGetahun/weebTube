@@ -19,6 +19,11 @@ app.use(cookieParser()); //parses cookies attached to the client request object
 
 app.use('/api/users', require('./routes/users'));
 
+app.get("/", (req,res) => {
+    res.json({
+        "yoo":"broo"
+    })
+})
 
 const port = process.env.PORT || 5000;
 
