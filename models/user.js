@@ -65,11 +65,11 @@ userSchema.methods.comparePassword = function(plainPassword,cb){
 
 //generates json web token when user is logging in and saves it to user document
 userSchema.methods.generateToken = function(cb) {
-    var user = this;
+    let user = this;
     console.log('user',user)
     console.log('userSchema', userSchema)
-    var token =  jwt.sign(user._id.toHexString(),'secret')
-    var oneHour = moment().add(1, 'hour').valueOf();
+    let token =  jwt.sign(user._id.toHexString(),'secret')
+    let oneHour = moment().add(1, 'hour').valueOf();
 
     user.tokenExp = oneHour;
     user.token = token;
@@ -79,10 +79,14 @@ userSchema.methods.generateToken = function(cb) {
     })
 }
 
+//statics same as method but allow for defining functions that are directly on the model
+//compared to just the instance. 
 userSchema.statics.findByToken = function (token, cb) {
-    var user = this;
+    let user = this;
 
+    //verify decodes token, it will give user_id since thats what we used to create it
     jwt.verify(token,'secret',function(err, decode){
+        //searches for this user with user_id and token
         user.findOne({"_id":decode, "token":token}, function(err, user){
             if(err) return cb(err);
             cb(null, user);
