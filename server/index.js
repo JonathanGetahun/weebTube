@@ -20,6 +20,8 @@ app.use(cookieParser()); //parses cookies attached to the client request object
 app.use('/api/users', require('./routes/users'));
 
 
+const port = process.env.PORT || 5000;
 
-
-app.listen(5000);
+app.listen(port, () => {
+    console.log(`Server running at port ${port}`)
+});

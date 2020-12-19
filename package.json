@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "youtube clone",
   "main": "index.js",
+  "engine":{
+    "node":"12.16.3",
+    "npm":"6.14.5"
+  },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jonathan Getahun",

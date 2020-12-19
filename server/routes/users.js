@@ -6,7 +6,7 @@ const { auth } = require("../middleware/auth");
 
 
 //first you need to have token in cookie, so log in
-//if auth is verified then it will send all this information to user
+//if auth is verified then it will send all this user information to user/request
 router.get("/auth", auth, (req, res) => {
     res.status(200).json({
         _id: req.user._id,
@@ -61,6 +61,8 @@ router.post("/login", (req, res) => {
     });
 });
 
+//remove token from cookie
+//use auth to put user information into request
 router.get("/logout", auth, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
         if (err) return res.json({ success: false, err });
