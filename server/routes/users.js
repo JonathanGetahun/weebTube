@@ -3,7 +3,7 @@ const router = express.Router();
 const { User } = require("../models/User");
 
 const { auth } = require("../middleware/auth");
-const  mongoose  = require('mongoose');
+
 
 
 //first you need to have token in cookie, so log in
@@ -24,7 +24,7 @@ router.get("/auth", auth, (req, res) => {
 router.post("/register", (req, res) => {
 
     const user = new User(req.body);
-    console.log(mongoose.connection.readyState)
+
     user.save((err, doc) => {
         if (err) return res.json({ success: false, user, err });
         return res.status(200).json({
@@ -43,10 +43,7 @@ router.post("/login", (req, res) => {
             });
 
         user.comparePassword(req.body.password, (err, isMatch) => {
-            if(err) res.json({
-                success:"fail",
-                message: err
-            })
+
             if (!isMatch)
                 return res.json({ loginSuccess: false, message: "Wrong password" });
 
@@ -69,7 +66,6 @@ router.post("/login", (req, res) => {
 //remove token from cookie
 //use auth to put user information into request
 router.get("/logout", auth, (req, res) => {
-    console.log(req.user.email)
     User.findOneAndUpdate({ email:req.user.email}, {  $unset:{ token: "", tokenExp: "" }}, (err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).send({
@@ -78,14 +74,5 @@ router.get("/logout", auth, (req, res) => {
     });
 });
 
-// router.get("/logout", auth, (req,res) => {
-//     console.log(req.user)
-//     User.findOne({email:req.user.email}, (err, doc) => {
-//         if (err) return res.json({success: garbage, err})
-//         return res.send({
-//             suc:"go"
-//         })
-//     })
-// })
 
 module.exports = router;
