@@ -66,8 +66,8 @@ userSchema.methods.comparePassword = function(plainPassword,cb){
 //generates json web token when user is logging in and saves it to user document
 userSchema.methods.generateToken = function(cb) {
     var user = this;
-    console.log('user',user)
-    console.log('userSchema', userSchema)
+    // console.log('user',user)
+    // console.log('userSchema', userSchema)
     var token =  jwt.sign(user._id.toHexString(),'secret')
     var oneHour = moment().add(1, 'hour').valueOf();
     
