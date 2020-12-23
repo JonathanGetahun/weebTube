@@ -37,7 +37,6 @@ function UploadVideoPage(props) {
     }
 
     const handleChangeDecsription = (event) => {
-        console.log(event.currentTarget.value)
 
         setDescription(event.currentTarget.value)
     }
@@ -50,20 +49,23 @@ function UploadVideoPage(props) {
         setCategories(event.currentTarget.value)
     }
 
+    // Submit all information about video to uploadVideo
     const onSubmit = (event) => {
 
         event.preventDefault();
 
+        //handles cases so user logs in first
         if (user.userData && !user.userData.isAuth) {
             return alert('Please Log in First')
         }
 
+        //handles cases so user doesnt submit empty form
         if (title === "" || Description === "" ||
             Categories === "" || FilePath === "" ||
             Duration === "" || Thumbnail === "") {
             return alert('Please first fill all the fields')
         }
-
+        //we bring the userdata over with this redux state
         const variables = {
             writer: user.userData._id,
             title: title,
@@ -75,6 +77,7 @@ function UploadVideoPage(props) {
             thumbnail: Thumbnail
         }
 
+        //by using props (we can use history and go back to home page)
         axios.post('/api/video/uploadVideo', variables)
             .then(response => {
                 if (response.data.success) {
@@ -87,23 +90,24 @@ function UploadVideoPage(props) {
 
     }
 
+    //this function is to load the video data and generate a thumbnail
     const onDrop = (files) => {
-
+        //this goes in the http request. 
         let formData = new FormData();
         const config = {
             header: { 'content-type': 'multipart/form-data' }
         }
-        console.log(files)
         formData.append("file", files[0])
 
         axios.post('/api/video/uploadfiles', formData, config)
             .then(response => {
                 if (response.data.success) {
-
+                    //data from video upload data
                     let variable = {
                         filePath: response.data.filePath,
                         fileName: response.data.fileName
                     }
+                    //save the file path to state
                     setFilePath(response.data.filePath)
 
                     //gerenate thumbnail with this filepath ! 
@@ -131,7 +135,8 @@ function UploadVideoPage(props) {
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <Title level={2} > Upload Video</Title>
             </div>
-
+            {//handles sending the video file to the backend connects with FormData interface above
+}
             <Form onSubmit={onSubmit}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Dropzone
@@ -151,7 +156,7 @@ function UploadVideoPage(props) {
 
                     {Thumbnail !== "" &&
                         <div>
-                            <img src={`http://localhost:5000/${Thumbnail}`} alt="haha" />
+                            <img src={`http://localhost:5000/${Thumbnail}`} alt="something cool" />
                         </div>
                     }
                 </div>
@@ -192,5 +197,6 @@ function UploadVideoPage(props) {
         </div>
     )
 }
+
 
 export default UploadVideoPage
