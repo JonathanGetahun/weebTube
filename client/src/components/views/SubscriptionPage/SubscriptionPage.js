@@ -5,33 +5,32 @@ import axios from 'axios';
 import moment from 'moment';
 const { Title } = Typography;
 const { Meta } = Card;
-function LandingPage() {
 
+function SubscriptionPage() {
+  
     const [Videos, setVideos] = useState([])
 
+    let variable = { userFrom : localStorage.getItem('userId')  }
+
     useEffect(() => {
-        axios.get('/api/video/getVideos')
+        axios.post('/api/video/getSubscriptionVideos', variable)
             .then(response => {
                 if (response.data.success) {
                     setVideos(response.data.videos)
                 } else {
-                    alert('Failed to get Videos')
+                    alert('Failed to get subscription videos')
                 }
             })
     }, [])
 
-
-
-
-
+   
     const renderCards = Videos.map((video, index) => {
 
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);
 
-        return <Col lg={6} md={8} xs={24} key={index}>
+        return <Col lg={6} md={8} xs={24}>
             <div style={{ position: 'relative' }}>
-                {/**routing for detail video page}**/}
                 <a href={`/video/${video._id}`} >
                 <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />
                 <div className=" duration"
@@ -55,19 +54,19 @@ function LandingPage() {
         </Col>
 
     })
-
-
-
+  
+  
+  
     return (
         <div style={{ width: '85%', margin: '3rem auto' }}>
-            <Title level={2} > Recommended </Title>
-            <hr />
+        <Title level={2} > Subscribed Videos </Title>
+        <hr />
 
-            <Row gutter={16}>
-                {renderCards}
-            </Row>
-        </div>
+        <Row gutter={16}>
+            {renderCards}
+        </Row>
+    </div>
     )
 }
 
-export default LandingPage
+export default SubscriptionPage

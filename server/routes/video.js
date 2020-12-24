@@ -54,11 +54,9 @@ router.post("/thumbnail", (req, res) => {
     //.on() 'filenames' will save the screenshots count, as an array
     ffmpeg(req.body.filePath)
         .on('filenames', function (filenames) {
-            console.log('Will generate ' + filenames.join(', '))
             thumbsFilePath = "uploads/thumbnails/" + filenames[0];
         })
         .on('end', function () {
-            console.log('Screenshots taken');
             return res.json({ success: true, thumbsFilePath: thumbsFilePath, fileDuration: fileDuration})
         })
         .screenshots({
@@ -111,31 +109,32 @@ router.post("/getVideo", (req, res) => {
     })
 });
 
-// router.post("/getSubscriptionVideos", (req, res) => {
+router.post("/getSubscriptionVideos", (req, res) => {
 
 
-//     //Need to find all of the Users that I am subscribing to From Subscriber Collection 
+    //Need to find all of the Users that I am subscribing to From Subscriber Collection 
     
-//     Subscriber.find({ 'userFrom': req.body.userFrom })
-//     .exec((err, subscribers)=> {
-//         if(err) return res.status(400).send(err);
+    Subscriber.find({ 'userFrom': req.body.userFrom })
+    .exec((err, subscribers)=> {
+        if(err) return res.status(400).send(err);
 
-//         let subscribedUser = [];
+        let subscribedUser = [];
 
-//         subscribers.map((subscriber, i)=> {
-//             subscribedUser.push(subscriber.userTo)
-//         })
+        subscribers.map((subscriber, i)=> {
+            subscribedUser.push(subscriber.userTo)
+        })
 
 
-//         //Need to Fetch all of the Videos that belong to the Users that I found in previous step. 
-//         Video.find({ writer: { $in: subscribedUser }})
-//             .populate('writer')
-//             .exec((err, videos) => {
-//                 if(err) return res.status(400).send(err);
-//                 res.status(200).json({ success: true, videos })
-//             })
-//     })
-// });
+        //Need to Fetch all of the Videos that belong to the Users that I found in previous step. 
+        //$in function will take care of every person in array and writer is the field ofc.
+        Video.find({ writer: { $in: subscribedUser }})
+            .populate('writer')
+            .exec((err, videos) => {
+                if(err) return res.status(400).send(err);
+                res.status(200).json({ success: true, videos })
+            })
+    })
+});
 
 module.exports = router;
 
