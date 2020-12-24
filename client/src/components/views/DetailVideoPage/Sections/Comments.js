@@ -44,9 +44,9 @@ function Comments(props) {
             <hr />
             {/* Comment Lists - update array from adding comments*/}
 
-            {props.CommentLists && props.CommentLists.map((comment, index) => (
                 {/**in database responseTo is saved, and on the first comment
                 there is no response To */}
+            {props.CommentLists && props.CommentLists.map((comment, index) => (
                 (!comment.responseTo &&
                     <React.Fragment>
                         <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
