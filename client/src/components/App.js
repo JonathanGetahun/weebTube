@@ -10,6 +10,7 @@ import Footer from "./views/Footer/Footer"
 import UploadVideoPage from "./views/UploadVideoPage/UploadVideoPage"
 import DetailVideoPage from "./views/DetailVideoPage/DetailVideoPage"
 import SubscriptionPage from "./views/SubscriptionPage/SubscriptionPage"
+import SideBar from "./views/Sidebar/Sidebar";
 
 //null anyone get access
 //false logged in user can't go inside
@@ -18,6 +19,7 @@ function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
       <NavBar />
+      <SideBar />
       <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
         <Switch>
           <Route exact path="/" component={Auth(LandingPage, null)} />
