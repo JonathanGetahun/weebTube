@@ -3,14 +3,15 @@ import { Route, Switch } from "react-router-dom";
 import Auth from "../hoc/auth";
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage.js";
+import HomePage from './views/LandingPage/HomePage';
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
-import Footer from "./views/Footer/Footer"
-import UploadVideoPage from "./views/UploadVideoPage/UploadVideoPage"
-import DetailVideoPage from "./views/DetailVideoPage/DetailVideoPage"
-import SubscriptionPage from "./views/SubscriptionPage/SubscriptionPage"
-import SideBar from "./views/Sidebar/Sidebar";
+import Footer from "./views/Footer/Footer";
+import UploadVideoPage from "./views/UploadVideoPage/UploadVideoPage";
+import DetailVideoPage from "./views/DetailVideoPage/DetailVideoPage";
+import SubscriptionPage from "./views/SubscriptionPage/SubscriptionPage";
+import TrendingSearchPage from "./views/TrendinSearchPage/TrendingSearchPage";
 
 //null anyone get access
 //false logged in user can't go inside
@@ -19,17 +20,18 @@ function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
       <NavBar />
-      <SideBar />
-      <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
+      {/* <SideBar /> */}
+      {/* <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}> */}
         <Switch>
-          <Route exact path="/" component={Auth(LandingPage, null)} />
+          <Route exact path="/" component={Auth(HomePage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/video/upload" component={Auth(UploadVideoPage, true)} />
           <Route exact path="/video/:videoId" component={Auth(DetailVideoPage, null)} />
           <Route exact path="/subscription" component={Auth(SubscriptionPage, null)} />
+          <Route exact path="/trending" component={Auth(TrendingSearchPage, null)} />
         </Switch>
-      </div>
+      {/* </div> */}
       <Footer />
     </Suspense>
   );

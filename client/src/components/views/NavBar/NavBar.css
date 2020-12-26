@@ -19,6 +19,7 @@
     align-items:center;
     width:40%;
     border:1px solid lightgray;
+
 }
 
 .header_inputButton{
@@ -41,4 +42,13 @@
 .header_input > input {
     flex: 1;
     border: none;
+}
+
+.header_left {
+    display:flex;
+    align-items:center;
+}
+
+.header_icon {
+    display:flex;
 }

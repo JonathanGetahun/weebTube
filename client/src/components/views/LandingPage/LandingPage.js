@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { FaCode } from "react-icons/fa";
-import { Card, Avatar, Col, Typography, Row } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
-const { Title } = Typography;
-const { Meta } = Card;
+
+import VideoCard from './VideoCard';
+import './LandingPage.css';
+
 function LandingPage() {
 
     const [Videos, setVideos] = useState([])
@@ -22,52 +23,34 @@ function LandingPage() {
 
 
 
-
-
-    const renderCards = Videos.map((video, index) => {
-
+    const renderCards = Videos.map(video => {
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);
+        var timestamp = `${minutes}:${seconds}`
+        var created = moment(video.createdAt).format("MMM Do YY")
 
-        return <Col lg={6} md={8} xs={24} key={index}>
-            <div style={{ position: 'relative' }}>
-                {/**routing for detail video page}**/}
-                <a href={`/video/${video._id}`} >
-                <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />
-                <div className=" duration"
-                    style={{ bottom: 0, right:0, position: 'absolute', margin: '4px', 
-                    color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8, 
-                    padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
-                    fontWeight:'500', lineHeight:'12px' }}>
-                    <span>{minutes} : {seconds}</span>
-                </div>
-                </a>
-            </div><br />
-            <Meta
-                avatar={
-                    <Avatar src={video.writer.image} />
-                }
-                title={video.title}
-            />
-            <span>{video.writer.name} </span><br />
-            <span style={{ marginLeft: '3rem' }}> {video.views}</span>
-            - <span> {moment(video.createdAt).format("MMM Do YY")} </span>
-        </Col>
-
+        return <VideoCard image={video.thumbnail} 
+        title={video.title} 
+        channel={video.writer.name}
+        views={video.views}
+        timestamp={timestamp}
+        channelImage={video.writer.image}
+        created = {created}
+        videoId = {video._id}/>
+    
     })
 
-
-
     return (
-        <div style={{ width: '85%', margin: '3rem auto' }}>
-            <Title level={2} > Recommended </Title>
-            <hr />
-
-            <Row gutter={16}>
+        <div className="recommendedVideos">
+            <h2>Recommended</h2>
+            <div className="recommendedVideos_videos">
                 {renderCards}
-            </Row>
+            </div>
         </div>
     )
+
+
 }
+
 
 export default LandingPage
