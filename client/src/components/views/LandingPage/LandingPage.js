@@ -23,16 +23,16 @@ function LandingPage() {
 
 
 
-    const renderCards = Videos.map(video => {
+    const renderCards = Videos.map((video, index)=> {
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);
         var timestamp = `${minutes}:${seconds}`
-        var created = moment(video.createdAt).format("MMM Do YY")
+        var created = moment(video.createdAt).format("DD/MM/YY")
 
-        return <VideoCard image={video.thumbnail} 
+        return <VideoCard key={index} image={video.thumbnail} 
         title={video.title} 
         channel={video.writer.name}
-        views={video.views}
+        views={Math.floor(video.views / 4 + 1)}
         timestamp={timestamp}
         channelImage={video.writer.image}
         created = {created}

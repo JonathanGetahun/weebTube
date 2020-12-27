@@ -9,7 +9,7 @@ function VideoRow({views, subs, description, timestamp, channel, title, image, c
             <div className="videoRow_text">
                 <h3>{title}</h3>
                 <p className="videoRow_headline">
-                    {channel} • <span className="videoRow_subs"><span className="videoRow_subsNumber">{subscribe}</span> Subscribers</span>
+                    {channel} • <span className="videoRow_subs"><span className="videoRow_subsNumber">{subscribe}</span> Subscriber(s)</span>
                      • {views} views • {timestamp} • Posted: {created}
                 </p>
                 <p className="videoRow_description">{description}</p>

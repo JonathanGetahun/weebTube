@@ -56,7 +56,7 @@ const logoutHandler = () => {
 
           <div className="header_input">
             <input style={{outline:"none"}} onChange={e => setInputSearch(e.target.value)} value={inputSearch} placeholder="Search" type="text" />
-            <Link to={`/search/${inputSearch}`}>
+            <Link to={`/trending`}>
                 <SearchIcon className="header_inputButton"/>
             </Link>
             

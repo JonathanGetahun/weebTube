@@ -46,7 +46,7 @@ function SearchPage() {
         return <VideoRow key={index} image={video.thumbnail}
         title={video.title}
         channel={video.writer.name}
-        views={video.views}
+        views={Math.floor(video.views / 4) + 1}
         timestamp={timestamp}
         channelImage={video.writer.image}
         created = {created}
@@ -64,10 +64,10 @@ function SearchPage() {
             <hr />
 
             <ChannelRow 
-                image="https://thumbor.forbes.com/thumbor/fit-in/416x416/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5bb22ae84bbe6f67d2e82e05%2F0x0.jpg%3Fbackground%3D000000%26cropX1%3D560%26cropX2%3D1783%26cropY1%3D231%26cropY2%3D1455"
+                
                 channel="Jonny G."
                 verified
-                subs="404k Subscribers"
+                subs="404k Subscriber(s)"
                 noOfVideos={342}
                 description="Check the channel out for awesome coding projects, nba factoids, league of legends domination, art, dessert recipes and more..."/>
         

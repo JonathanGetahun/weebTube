@@ -49,6 +49,7 @@ function UploadVideoPage(props) {
         setCategories(event.currentTarget.value)
     }
 
+
     // Submit all information about video to uploadVideo
     const onSubmit = (event) => {
 

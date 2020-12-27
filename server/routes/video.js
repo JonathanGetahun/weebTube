@@ -136,5 +136,23 @@ router.post("/getSubscriptionVideos", (req, res) => {
     })
 });
 
+router.post("/incViews", (req,res) => {
+
+    Video.findOneAndUpdate({"_id":req.body.videoId}, {$inc: {views: 1}}, {new:true, upsert: true})
+         .exec((err, videos) => {
+             if(err) return res.status(400).send(err);
+             res.status(200).json({success: true, videos})
+         })
+
+})
+
+router.get("/getViews", (req, res) => {
+    Video.find({"_id":req.body.videoId})
+        .exec((err, video) =>{
+            if(err) return res.status(400).send(err);
+            res.status(200).json({success: true, video})
+                })
+})
+
 module.exports = router;
 

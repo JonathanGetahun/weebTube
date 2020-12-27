@@ -39,10 +39,21 @@ function DetailVideoPage(props) {
 
     }, [])
 
+
+    Video && axios.post("/api/video/incViews", videoVariable)
+        .then(response => {
+            if(response.data.success){
+            } else {
+                alert('Failed to increase views')
+            }
+
+        })
+
     //This gets a new comment from child component   
     const updateComment = (newComment) => {
         setCommentLists(CommentLists.concat(newComment))
     }
+
 
     //Design below is from antd, video style 
     //use the file path to get video in video tag\
@@ -52,14 +63,15 @@ function DetailVideoPage(props) {
             <Row>
                 <Col lg={18} xs={24}>
                     <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-                        <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
+                        <video style={{ height:"580px", width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
 
                         {/**Pass the user prop(VideoWriter) and dislikes and getting current user from local storage */}
                         <List.Item
                             actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />, <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />]}
                         >
                             <List.Item.Meta
-                                avatar={<Avatar src={Video.writer && Video.writer.image} />}
+                                // avatar={<Avatar src={Video.writer && Video.writer.image} />}
+                                avatar={<Avatar style={{ color: '#ffffff', backgroundColor: '#f5222d' }}>{Video.writer && Video.writer.name[0]}</Avatar>}
                                 title={<a href="https://ant.design">{Video.title}</a>}
                                 description={Video.description}
                             />
