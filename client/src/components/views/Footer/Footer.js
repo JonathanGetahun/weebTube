@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon} from 'antd';
+import logo from './GitHub-Mark-32px.png'
 
 function Footer() {
     return (
@@ -8,7 +8,8 @@ function Footer() {
             flexDirection: 'column', alignItems: 'center',
             justifyContent: 'center', fontSize:'1rem'
         }}>
-           <p> Made By Jonathan Getahun  <Icon type="smile" /></p>
+           <p>2020 Created By: Jonathan Getahun</p>
+            <div><a href="https://github.com/JonathanGetahun"> <img src={logo} alt="my github" /></a></div>
         </div>
     )
 }

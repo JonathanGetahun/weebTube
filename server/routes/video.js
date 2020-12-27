@@ -154,5 +154,22 @@ router.get("/getViews", (req, res) => {
                 })
 })
 
+router.post("/videoSub", (req, res) => {
+    Video.findOneAndUpdate({"_id": req.body.videoId}, {$push:{subscriber: req.body.userTo}}, {new:true, upsert: true})
+        .exec((err, video) => {
+            if(err) return res.status(400).send(err);
+            res.status(200).json({success:true, video})
+        })
+})
+
+router.post("/videoSubDelete", (req, res) => {
+    Video.findByIdAndUpdate({"_id": req.body.videoId}, {$pop:{subscriber:1}}, {new:true, upsert:true})
+        .exec((err, video) => {
+            if(err) res.status(400).send(err);
+            res.status(200).json({success:true, video})
+        })
+})
+
+
 module.exports = router;
 

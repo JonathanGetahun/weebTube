@@ -8,6 +8,7 @@ import axios from 'axios';
 function Subscriber(props) {
     const userTo = props.userTo
     const userFrom = props.userFrom
+    const videoId = props.videoId
 
     const [SubscribeNumber, setSubscribeNumber] = useState(0)
     const [Subscribed, setSubscribed] = useState(false)
@@ -31,6 +32,14 @@ function Subscriber(props) {
                     }
                 })
 
+            axios.post('/api/video/videoSubDelete', {videoId: videoId})
+                .then(response => {
+                    if(response.data.success){
+                    } else {
+                        alert("failed to delete video subscription")
+                    }
+                })
+
         } else {
             // when we are not subscribed yet
             
@@ -41,6 +50,14 @@ function Subscriber(props) {
                         setSubscribed(!Subscribed)
                     } else {
                         alert('Failed to subscribe')
+                    }
+                })
+
+            axios.post('/api/video/videoSub', { videoId: videoId, userTo: userTo})
+                .then(response => {
+                    if(response.data.success){
+                    } else {
+                        alert('Failed to update video subscription')
                     }
                 })
         }

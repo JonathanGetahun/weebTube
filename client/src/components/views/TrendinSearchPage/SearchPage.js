@@ -11,7 +11,6 @@ import moment from 'moment';
 function SearchPage() {
 
     const [Videos, setVideos] = useState([])
-    const [subscribe, setSubscribeNumber ] = useState([])
 
     useEffect(() => {
         axios.get('/api/video/getVideos')
@@ -25,23 +24,12 @@ function SearchPage() {
 
     }, [])
 
-    Videos.map(video => {axios.post('/api/subscribe/subscribeNumber', {userTo: video.writer._id})
-    .then(response => {
-        if (response.data.success) {
-            setSubscribeNumber(response.data.subscribeNumber)
-        } else {
-            alert('Failed to get subscriber Number')
-        }
-    })})
-
-
 
     const renderCards = Videos.map((video, index) => {
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);
         var timestamp = `${minutes}:${seconds}`
         var created = moment(video.createdAt).format("MMM Do YY")
-
 
 
         return <VideoRow key={index} image={video.thumbnail}
@@ -53,7 +41,8 @@ function SearchPage() {
         created = {created}
         videoId = {video._id}
         description = {video.description}
-        subscribe = {subscribe} />
+        subscribe = {video.subscriber.length}
+         />
     })
 
     return (

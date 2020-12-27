@@ -67,7 +67,7 @@ function DetailVideoPage(props) {
 
                         {/**Pass the user prop(VideoWriter) and dislikes and getting current user from local storage */}
                         <List.Item
-                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />, <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />]}
+                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />, <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} videoId={videoId}/>]}
                         >
                             <List.Item.Meta
                                 // avatar={<Avatar src={Video.writer && Video.writer.image} />}
