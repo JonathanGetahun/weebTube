@@ -12,7 +12,7 @@ import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 function Sidebar() {
     return (
         <div className="sidebar">
-            {window.location.pathname == "/" ? <a href="/"><SidebarRow selected Icon={HomeIcon} title="Home" /> </a>: <a href="/"><SidebarRow Icon={HomeIcon} title="Home" /></a>}
+            {window.location.pathname === "/" ? <a href="/"><SidebarRow selected Icon={HomeIcon} title="Home" /> </a>: <a href="/"><SidebarRow Icon={HomeIcon} title="Home" /></a>}
             <a href="/video/upload"><SidebarRow Icon={OndemandVideoIcon} title="Upload video" /></a>
             <a href="/subscription"><SidebarRow Icon={SubscriptionsIcon} title="Subscription" /></a>
 

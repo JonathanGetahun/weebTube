@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps*/
 import React, { useEffect, useState } from 'react'
-import { FaCode } from "react-icons/fa";
 import { Card, Avatar, Col, Typography, Row } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
@@ -44,7 +44,7 @@ function SubscriptionPage() {
             </div><br />
             <Meta
                 avatar={
-                    <Avatar src={video.writer.image} />
+                    <Avatar>{video.writer.name[0]}</Avatar>
                 }
                 title={video.title}
             />

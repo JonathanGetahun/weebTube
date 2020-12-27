@@ -1,4 +1,4 @@
-
+/* eslint-disable react-hooks/exhaustive-deps*/
 import React, { useEffect, useState } from 'react'
 import { List, Avatar, Row, Col } from 'antd';
 import axios from 'axios';

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid*/
 import React, { useState } from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -37,6 +38,7 @@ const [anchorEl, setAnchorEl] = React.useState(null);
 const logoutHandler = () => {
   axios.get(`${USER_SERVER}/logout`).then(response => {
     if (response.status === 200) {
+      localStorage.removeItem('rememberMe');
       props.history.push("/login");
     } else {
       alert('Log Out Failed')
@@ -50,7 +52,7 @@ const logoutHandler = () => {
             <div className="header_icon">
             <MenuIcon />
             </div>
-            <a href="/"><img className="header_logo" 
+            <a href="/"><img className="header_logo" alt="weebLogo"
             src={require('../../../assets/images/weebTubeLogo2.png')} width={130}/> </a>
           </div>
 
