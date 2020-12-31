@@ -23,7 +23,7 @@ function VideoCard({ image, title, channel, views, timestamp, channelImage, crea
     return (
         <div className="videoCard">
             <a href={`/video/${videoId}`} >
-            <img className="videoCard_thumbnail" src={`http://localhost:5000/${image}`} alt="thumbnail" />
+            <img className="videoCard_thumbnail" src={`https://weebtube.herokuapp.com/${image}`} alt="thumbnail" />
             <div className="videoCard_info">
                 <Avatar className= {classes.blueGrey}>{channel[0]}</Avatar>
 
