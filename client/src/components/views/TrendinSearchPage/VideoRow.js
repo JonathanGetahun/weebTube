@@ -4,7 +4,7 @@ import './VideoRow.css'
 function VideoRow({views, subs, description, timestamp, channel, title, image, created, videoId, subscribe}) {
     return (
         <div className="videoRow">
-            <img src={`http://localhost:5000/${image}`} alt="thumbnail" />
+            <img src={`https://weebtube.herokuapp.com/${image}`} alt="thumbnail" />
             <a href={`/video/${videoId}`}>
             <div className="videoRow_text">
                 <h3>{title}</h3>

@@ -64,7 +64,7 @@ function DetailVideoPage(props) {
             <Row>
                 <Col lg={18} xs={24}>
                     <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-                        <video style={{ height:"580px", width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
+                        <video style={{ height:"580px", width: '100%' }} src={`https://weebtube.herokuapp.com/${Video.filePath}`} controls></video>
 
                         {/**Pass the user prop(VideoWriter) and dislikes and getting current user from local storage */}
                         <List.Item
