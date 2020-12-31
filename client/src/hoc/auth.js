@@ -12,12 +12,12 @@ export default function (SpecificComponent, option, adminRoute = null) {
         useEffect(() => {
             //To know my current status, send Auth request 
             dispatch(auth()).then(response => {
-                //Not Loggined in Status 
+                //Not Logged in Status 
                 if (!response.payload.isAuth) {
                     if (option) {
                         props.history.push('/login')
                     }
-                    //Loggined in Status 
+                    //Logged in Status 
                 } else {
                     //supposed to be Admin page, but not admin person wants to go inside
                     if (adminRoute && !response.payload.isAdmin) {

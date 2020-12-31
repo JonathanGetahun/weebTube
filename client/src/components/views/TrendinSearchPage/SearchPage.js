@@ -41,7 +41,7 @@ function SearchPage() {
         created = {created}
         videoId = {video._id}
         description = {video.description}
-        subscribe = {video.subscriber.length}
+        subscribe = {video.writer.subNum}
          />
     })
 

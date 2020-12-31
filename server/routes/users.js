@@ -3,7 +3,7 @@ const router = express.Router();
 const { User } = require("../models/user.js");
 
 const { auth } = require("../middleware/auth");
-
+const { Video } = require("../models/Video");
 
 
 //first you need to have token in cookie, so log in
@@ -63,6 +63,7 @@ router.post("/login", (req, res) => {
     });
 });
 
+
 //remove token from cookie
 //use auth to put user information into request
 router.get("/logout", auth, (req, res) => {
@@ -73,6 +74,7 @@ router.get("/logout", auth, (req, res) => {
         });
     });
 });
+
 
 
 module.exports = router;

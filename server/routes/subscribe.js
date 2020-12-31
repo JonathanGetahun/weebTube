@@ -3,6 +3,7 @@ const router = express.Router();
 
 
 const { Subscriber } = require("../models/Subscriber");
+const { User } = require("../models/user.js");
 
 const { auth } = require("../middleware/auth");
 
@@ -14,7 +15,14 @@ router.post("/subscribeNumber", (req, res) => {
     .exec((err, subscribe) => {
         if(err) return res.status(400).send(err)
 
-        res.status(200).json({ success: true, subscribeNumber: subscribe.length  })
+        let length = subscribe.length
+        User.findByIdAndUpdate({"_id": req.body.userTo}, {$set: {subNum: length}},  {new:true, upsert: true})
+            .exec((err, len) => {
+                if (err) return res.status(400).send(err)
+                res.status(200).json({ success: true, subscribeNumber: length  })
+            })
+
+        
     })
 
 });

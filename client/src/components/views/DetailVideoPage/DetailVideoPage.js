@@ -39,7 +39,7 @@ function DetailVideoPage(props) {
 
     }, [])
 
-
+    
     Video && axios.post("/api/video/incViews", videoVariable)
         .then(response => {
             if(response.data.success){
@@ -59,6 +59,7 @@ function DetailVideoPage(props) {
     //use the file path to get video in video tag\
     //row and col from antd make the page responsive
     if (Video.writer) {
+        console.log(Video.filePath)
         return (
             <Row>
                 <Col lg={18} xs={24}>
